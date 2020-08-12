@@ -4,13 +4,19 @@ import { Ingredient } from "../shared/ingredient.model";
 export class ShoppingService {
 
     ingredientsChanged = new Subject<Ingredient[]>();
-    ingredients:Ingredient[] = [
+    startedEditing = new Subject<number>();
+
+    private ingredients:Ingredient[] = [
         new Ingredient('apple',5),
         new Ingredient('custard powder',1)
       ];
 
-    getIngredient(){
+    getIngredients(){
         return this.ingredients.slice();
+    }
+
+    getIngredient(index:number){
+        return this.ingredients.slice()[index];
     }
 
     addIngredient(ingredient:Ingredient){
@@ -18,8 +24,18 @@ export class ShoppingService {
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
+    updateIngredient(index:number, ingredient:Ingredient){
+        this.ingredients[index] = ingredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
     IngredientsForRecipeSelected(ingredients:Ingredient[]){
         this.ingredients.push(...ingredients);
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    deleteIngredient(index:number){
+        this.ingredients.splice(index,1);
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 }
