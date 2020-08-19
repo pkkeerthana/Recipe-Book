@@ -1,47 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingComponent } from './shopping/shopping.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { ShoppingEditComponent } from './shopping/shopping-edit/shopping-edit.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { DropdownDirective } from './shared/dropdown.directive';
-import { ShoppingService } from './shopping/shopping.service';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeService } from './recipes/recipe.service';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core.module';
+import { LoggingService } from './logging.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipesComponent,
-    ShoppingComponent,
-    RecipeDetailComponent,
-    RecipeListComponent,
-    ShoppingEditComponent,
-    HeaderComponent,
-    RecipeItemComponent,
-    DropdownDirective,
-    RecipeStartComponent,
-    RecipeEditComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    CoreModule
   ],
-  providers: [ShoppingService,RecipeService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [LoggingService]
 })
 export class AppModule { }
